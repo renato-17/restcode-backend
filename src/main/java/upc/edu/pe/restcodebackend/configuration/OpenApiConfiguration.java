@@ -8,14 +8,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class OpenApiConfiguration {
-    @Bean(name = "restcodeOpenApi")
-    public OpenAPI restcodeOpenApi() {
+    @Bean(name = "restCodeOpenApi")
+    public OpenAPI restCodeOpenApi() {
         return new OpenAPI()
                 .components(new Components())
                 .info(new Info()
                         .title("RestCode Application API")
                         .description(
-                                "Restcode API implemented with Spring Boot RESTful service and documented using springdoc-openapi and OpenAPI 3.0"));
+                                "RestCode API implemented with Spring Boot RESTful service and documented using springdoc-openapi and OpenAPI 3.0"));
 
     }
 

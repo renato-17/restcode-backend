@@ -14,7 +14,6 @@ import upc.edu.pe.restcodebackend.domain.model.Owner;
 import upc.edu.pe.restcodebackend.domain.repository.AppointmentRepository;
 import upc.edu.pe.restcodebackend.domain.repository.ConsultantRepository;
 import upc.edu.pe.restcodebackend.domain.repository.OwnerRepository;
-import upc.edu.pe.restcodebackend.domain.repository.OwnerRepository;
 import upc.edu.pe.restcodebackend.domain.service.AppointmentService;
 import upc.edu.pe.restcodebackend.exception.ResourceNotFoundException;
 import upc.edu.pe.restcodebackend.service.AppointmentServiceImpl;

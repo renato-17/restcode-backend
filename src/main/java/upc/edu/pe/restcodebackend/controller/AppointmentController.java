@@ -49,7 +49,7 @@ public class AppointmentController {
     @PostMapping("/appointments")
     public AppointmentResource createAppointment(@Valid @RequestBody SaveAppointmentResource resource,
                                                  @RequestParam("owner") Long ownerId,
-                                                 @RequestParam("consultantId") Long consultantId){
+                                                 @RequestParam("consultant") Long consultantId){
         Appointment appointment = convertToEntity(resource);
         return convertToResource(appointmentService.createAppointment(appointment,ownerId,consultantId));
     }

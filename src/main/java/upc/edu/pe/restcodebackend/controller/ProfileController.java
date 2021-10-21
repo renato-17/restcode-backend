@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/api")
 public class ProfileController {
     @Autowired
     private UserServiceImpl userService;

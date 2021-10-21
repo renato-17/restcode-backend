@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import upc.edu.pe.restcodebackend.security.JWTAuthorizationFilter;
 
 
@@ -33,19 +31,17 @@ public class RestcodeBackendApplication {
     class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-
-            http.csrf().disable()
+            http.cors().and()
+                    .csrf().disable()
                     .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                     .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/api/users/authentication").permitAll()
+                    .antMatchers(HttpMethod.POST, "/users/**").permitAll()
                     .antMatchers("/v2/api-docs",
                             "/configuration/ui",
                             "/swagger-resources/**",
                             "/configuration/security",
                             "/swagger-ui.html",
                             "/webjars/**").permitAll()
-                    .antMatchers(HttpMethod.POST, "/api/owners").permitAll()
-                    .antMatchers(HttpMethod.POST, "/api/consultants").permitAll()
                     .antMatchers("/api/**").authenticated();
         }
 

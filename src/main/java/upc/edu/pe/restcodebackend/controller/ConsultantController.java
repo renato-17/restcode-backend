@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
 public class ConsultantController {
     @Autowired
     private ModelMapper mapper;
@@ -28,7 +27,7 @@ public class ConsultantController {
     private ConsultantService consultantService;
 
     @Operation(summary = "Get All Consultants", description = "Get all consultants", tags = {"consultants"})
-    @GetMapping("/consultants")
+    @GetMapping("api/consultants")
     public Page<ConsultantResource> getAllConsultants(Pageable pageable){
         Page<Consultant> consultantPage = consultantService.getAllConsultants(pageable);
 
@@ -41,20 +40,20 @@ public class ConsultantController {
     }
 
     @Operation(summary = "Get Consultant By Id", description = "Get Consultant By Id", tags = {"consultants"})
-    @GetMapping("/consultants/{consultantId}")
+    @GetMapping("api/consultants/{consultantId}")
     public ConsultantResource getConsultantById(@PathVariable Long consultantId){
         return convertToResource(consultantService.getConsultantById(consultantId));
     }
 
     @Operation(summary = "Create Consultant", description = "Create a new consultant", tags = {"consultants"})
-    @PostMapping("/consultants")
+    @PostMapping("users/consultants")
     public ConsultantResource createConsultant(@Valid @RequestBody SaveConsultantResource resource){
         Consultant consultant = convertToEntity(resource);
         return convertToResource(consultantService.createConsultant(consultant));
     }
 
     @Operation(summary = "Update Consultant", description = "Update a consultant", tags = {"consultants"})
-    @PutMapping("/consultants/{consultantId}")
+    @PutMapping("api/consultants/{consultantId}")
     public ConsultantResource updateConsultant(
             @PathVariable Long consultantId,
             @RequestBody @Valid SaveConsultantResource resource){
@@ -63,7 +62,7 @@ public class ConsultantController {
     }
 
     @Operation(summary = "Delete a consultant", description = "Delete a consultant", tags = {"consultants"})
-    @DeleteMapping("/consultants/{consultantId}")
+    @DeleteMapping("api/consultants/{consultantId}")
     public ResponseEntity<?> deleteConsultant(@PathVariable Long consultantId){
         return consultantService.deleteConsultant(consultantId);
     }

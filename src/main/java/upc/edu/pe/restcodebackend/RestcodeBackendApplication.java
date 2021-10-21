@@ -30,13 +30,20 @@ public class RestcodeBackendApplication {
     class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
+
             http.csrf().disable()
                     .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                     .authorizeRequests()
                     .antMatchers(HttpMethod.POST, "/api/users/authentication").permitAll()
+                    .antMatchers("/v2/api-docs",
+                            "/configuration/ui",
+                            "/swagger-resources/**",
+                            "/configuration/security",
+                            "/swagger-ui.html",
+                            "/webjars/**").permitAll()
                     .antMatchers(HttpMethod.POST, "/api/owners").permitAll()
                     .antMatchers(HttpMethod.POST, "/api/consultants").permitAll()
-                    .anyRequest().authenticated();
+                    .antMatchers("/api/**").authenticated();
         }
 
     }

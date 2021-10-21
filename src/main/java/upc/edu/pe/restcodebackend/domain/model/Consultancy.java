@@ -8,12 +8,45 @@ import javax.validation.constraints.NotNull;
 public class Consultancy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
     @NotNull
-    public String diagnosis;
+    private String diagnosis;
     @NotNull
-    public String recommendation;
+    private String recommendation;
 
-    //Relations
-    //Appointments
+
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,optional = false)
+    @JoinColumn(name = "appointment_id", nullable = false)
+    private Appointment appointment;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public String getRecommendation() {
+        return recommendation;
+    }
+
+    public void setRecommendation(String recommendation) {
+        this.recommendation = recommendation;
+    }
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
 }

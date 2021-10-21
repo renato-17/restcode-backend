@@ -36,7 +36,7 @@ public class RestcodeBackendApplication {
                     .antMatchers(HttpMethod.POST, "/api/users/authentication").permitAll()
                     .antMatchers(HttpMethod.POST, "/api/owners").permitAll()
                     .antMatchers(HttpMethod.POST, "/api/consultants").permitAll()
-                    .anyRequest().authenticated();
+                    .anyRequest().permitAll();
         }
 
     }

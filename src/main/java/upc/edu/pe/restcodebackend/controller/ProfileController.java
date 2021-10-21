@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:8081",methods = RequestMethod.POST)
+
 @RestController
 @RequestMapping("/api")
 public class ProfileController {

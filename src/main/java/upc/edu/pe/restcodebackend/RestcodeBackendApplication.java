@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import upc.edu.pe.restcodebackend.security.JWTAuthorizationFilter;
 
 
@@ -24,6 +26,7 @@ public class RestcodeBackendApplication {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
 
     @EnableWebSecurity
     @Configuration

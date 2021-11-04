@@ -1,79 +1,95 @@
 package upc.edu.pe.restcodebackend.cucumber.glue;
 
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.bs.A;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.*;
-import org.springframework.web.client.RestTemplate;
-import upc.edu.pe.restcodebackend.resource.AppointmentResource;
-import upc.edu.pe.restcodebackend.resource.AuthUser;
-import upc.edu.pe.restcodebackend.resource.save.AuthRequest;
-import upc.edu.pe.restcodebackend.resource.save.SaveAppointmentResource;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.util.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class ContratarServicioDeConsultoria {
-    List<AppointmentResource> appointmentResources = new ArrayList<>();
-    List<SaveAppointmentResource> saveAppointmentResources = new ArrayList<>();;
-    @LocalServerPort
-    private String port;
-    private final RestTemplate restTemplate = new RestTemplate();
-    private final String postUrl = "http://localhost:9090/restcode-backend/";
+    private static WebDriver webDriver;
+    private  String urlPage = "http://localhost:4200/sign-in";
 
-    private String url;
-    public HttpHeaders headers = new HttpHeaders();;
-    private HttpEntity<SaveAppointmentResource> entity;
+    private static WebElement buttonAsesoria;
+    private static WebElement buttonConsultor;
 
-    private String token = "Bearer ";
 
-    @Given("que el dueño del restaurante quiere programar una cita con un consultor")
-    public void queElDueñoDelRestauranteQuiereProgramarUnaCitaConUnConsultor() {
-        url = postUrl + "users/authentication";
-        AuthRequest request = new AuthRequest();
-        request.setEmail("renato@gmail.com");
-        request.setPassword("renato");
 
-        AuthUser user = restTemplate.postForObject(url,request,AuthUser.class);
-        assert user != null;
-
-        token += user.getToken();
-        headers.set("Authorization", token);
-
-        assertThat(user).isNotNull();
-    }
-
-    @When("solicita una cita ingresando los datos que se piden")
-    public void solicitaUnaCitaIngresandoLosDatosQueSePiden(DataTable table) throws ParseException {
+    @Given("el dueño del restaurante se encuentra en la vista principal después de haber iniciado sesión")
+    public void elDueñoDelRestauranteSeEncuentraEnLaVistaPrincipalDespuésDeHaberIniciadoSesión(DataTable table) throws InterruptedException {
+        String pathDriver = System.getProperty("user.dir") + "\\driver\\chromedriver_95.exe";
+        System.setProperty("webdriver.chrome.driver", pathDriver);
+        webDriver = new ChromeDriver();
+        webDriver.get(urlPage);
         List<Map<String, String>> rows = table.asMaps(String.class, String.class);
-        url = postUrl + "api/appointments?owner=2&consultant=3";
 
         for (Map<String, String> columns : rows) {
-            SaveAppointmentResource appointment = new SaveAppointmentResource();
-            appointment.setCurrentDateTime(new SimpleDateFormat("dd/MM/yyyy").parse(columns.get("CurrentDateTime")));
-            appointment.setCurrentDateTime(new SimpleDateFormat("dd/MM/yyyy").parse(columns.get("ScheduleDateTime")));
-            appointment.setTopic(columns.get("Topic"));
-            appointment.setTopic(columns.get("MeetLink"));
-            saveAppointmentResources.add(appointment);
-            entity = new HttpEntity<>(appointment,headers);
-            ResponseEntity<AppointmentResource> appointmentResource = restTemplate.exchange(url,HttpMethod.POST,entity,AppointmentResource.class);
-
-            assertThat(appointmentResource.getStatusCode()).isEqualTo(HttpStatus.OK);
-            appointmentResources.add(appointmentResource.getBody());
+            //Email
+            webDriver.findElement(By.id("login-email")).sendKeys(columns.get("Email"));
+            //Password
+            webDriver.findElement(By.id("login-password")).sendKeys(columns.get("Password"));
+            //Button
+            webDriver.findElement(By.id("button-login")).click();
         }
+        Thread.sleep(2000);
+    }
+    private static String consultancyId;
+    @When("selecciona el botón Asesorías y consultorías")
+    public void seleccionaElBotónAsesoríasYConsultorías() {
+        consultancyId = "consultancypg";
+    }
+    @Then("el sistema lo redirecciona a la vista “Asesorías y consultorías\".")
+    public void elSistemaLoRedireccionaALaVistaAsesoríasYConsultorías() throws InterruptedException {
+       webDriver.findElement(By.cssSelector("#consultancypg")).click();
+       Thread.sleep(2000);
+    }
+
+    private static String consultancyXPath;
+    @Given("el dueño del restaurante quiere programar una cita con un consultor")
+    public void elDueñoDelRestauranteQuiereProgramarUnaCitaConUnConsultor() {
+        consultancyXPath = "consultancy-3";
+    }
+
+    @When("elige un consultor y solicita una cita ingresando los datos que se piden")
+    public void eligeUnConsultorYSolicitaUnaCitaIngresandoLosDatosQueSePiden(DataTable table) throws InterruptedException {
+        List<Map<String, String>> rows = table.asMaps(String.class, String.class);
+        webDriver.findElement(By.id(consultancyXPath)).click();
+
+        for (Map<String, String> columns : rows) {
+            //CurrentDate
+            List<String> currentDate = Arrays.asList(columns.get("CurrentDateTime").split("T"));
+
+            WebElement currenDateElement  = webDriver.findElement(By.id("add-currentDate"));
+            currentDate.forEach((number)->{
+                currenDateElement.sendKeys(number);
+                currenDateElement.sendKeys(Keys.TAB);
+            });
+
+            //ScheduleDate
+            List<String> scheduleDateTime = Arrays.asList(columns.get("ScheduleDateTime").split("T"));
+            WebElement scheduleDateTimeElement  = webDriver.findElement(By.id("add-scheduleDateTime"));
+            scheduleDateTime.forEach((number)->{
+                scheduleDateTimeElement.sendKeys(number);
+                scheduleDateTimeElement.sendKeys(Keys.TAB);
+            });
+            //Topic
+            webDriver.findElement(By.id("add-topic")).sendKeys(columns.get("Topic"));
+            //Link
+            webDriver.findElement(By.id("add-meetLink")).sendKeys(columns.get("MeetLink"));
+            //Button
+            webDriver.findElement(By.id("add-button")).click();
+        }
+        Thread.sleep(1000);
     }
 
     @Then("el sistema programa la cita de manera exitosa.")
     public void elSistemaProgramaLaCitaDeManeraExitosa() {
-        assertThat(appointmentResources.size()).isNotZero();
+        webDriver.findElement(By.id("correctDialogClose")).click();
     }
 }

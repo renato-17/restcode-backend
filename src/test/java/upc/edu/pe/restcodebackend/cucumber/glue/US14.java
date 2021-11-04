@@ -56,12 +56,25 @@ public class US14 {
             webDriver.findElement(By.xpath("//*[@id=\"input-43\"]")).sendKeys(columns.get("Ruc"));
             //Button
             webDriver.findElement(By.xpath("//*[@id=\"app\"]/div/main/div/div/div/div[3]/button")).click();
+//
         }
     }
 
     @Then("el sistema guarda todos los datos registrados por el usuario")
-    public void elSistemaGuardaTodosLosDatosRegistradosPorElUsuario() {
-        assertThat(true).isTrue();
+    public void elSistemaGuardaTodosLosDatosRegistradosPorElUsuario(DataTable table) {
+        List<Map<String, String>> rows = table.asMaps(String.class, String.class);
+
+        for (Map<String, String> columns : rows) {
+            //Restaurant
+            //Name
+            webDriver.findElement(By.xpath("/html/body/div/div/main/div/div/div/div[2]/form/div[1]/div/div[1]/div/input")).sendKeys(columns.get("Name"));
+            //Address
+            webDriver.findElement(By.xpath("//*[@id=\"input-52\"]")).sendKeys(columns.get("Address"));
+            //Phone number
+            webDriver.findElement(By.xpath("//*[@id=\"input-55\"]")).sendKeys(columns.get("PhoneNumber"));
+            //Button
+            webDriver.findElement(By.xpath("//*[@id=\"app\"]/div/main/div/div/div/div[3]/button")).click();
+        }
     }
 
 

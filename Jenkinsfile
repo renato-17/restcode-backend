@@ -8,7 +8,7 @@ pipeline {
         datadog(tags: ["team:backend"])
     }
     stages {
-        stage ('Compile Stage') {
+        stage ('Integration Stage') {
             steps {
                 withMaven(maven : 'MAVEN_3_8_3') {
                     bat 'mvn clean compile'
@@ -22,7 +22,7 @@ pipeline {
                 }
             }
         }
-        stage ('package Stage') {
+        stage ('Delivery Stage') {
             steps {
                 withMaven(maven : 'MAVEN_3_8_3') {
                     bat 'mvn package'

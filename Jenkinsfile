@@ -29,10 +29,5 @@ pipeline {
                 }
             }
         }
-        datadog(collectLogs: true, tags: ["team:backend"]){
-            stage ('operation'){
-
-            }
-        }
     }
 }

@@ -22,4 +22,5 @@ public class RegistrarVentasDeRestaurante {
     public void elSistemaGuardaLaVentaExitosamente() {
         assertThat(true).isTrue();
     }
+
 }

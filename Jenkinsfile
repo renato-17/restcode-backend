@@ -4,6 +4,9 @@ pipeline {
         maven 'MAVEN_3_8_3'
         jdk 'JAVA_1_8'
     }
+    options {
+        datadog(tags: ["team:backend"])
+    }
     stages {
         stage ('Compile Stage') {
             steps {
@@ -24,6 +27,11 @@ pipeline {
                 withMaven(maven : 'MAVEN_3_8_3') {
                     bat 'mvn package'
                 }
+            }
+        }
+        datadog(collectLogs: true, tags: ["team:backend"]){
+            stage ('operation'){
+
             }
         }
     }

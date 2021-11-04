@@ -30,6 +30,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    public Page<Appointment> getAllAppointmentsByUserId(Pageable pageable, Long ownerId, Long consultantId) {
+        return ownerId != -1L ? appointmentRepository.findAllByOwnerId(pageable,ownerId) : appointmentRepository.findAllByConsultantId(pageable,consultantId);
+    }
+
+    @Override
     public Appointment getAppointmentById(Long appointmentId) {
         return appointmentRepository.findById(appointmentId)
                 .orElseThrow(()-> new ResourceNotFoundException("Appointment","Id",appointmentId));

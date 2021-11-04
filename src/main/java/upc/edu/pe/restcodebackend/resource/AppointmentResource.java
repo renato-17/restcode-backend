@@ -7,6 +7,8 @@ public class AppointmentResource {
     private Date scheduleDateTime;
     private String topic;
     private String meetLink;
+    private String ownerId;
+    private String consultantId;
 
     public Long getId() {
         return id;
@@ -48,4 +50,19 @@ public class AppointmentResource {
         this.meetLink = meetLink;
     }
 
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public String getConsultantId() {
+        return consultantId;
+    }
+
+    public void setConsultantId(String consultantId) {
+        this.consultantId = consultantId;
+    }
 }

@@ -28,8 +28,15 @@ public class AppointmentController {
 
     @Operation(summary = "Get All Appointments", description = "Get all appointments", tags = {"appointments"})
     @GetMapping("/appointments")
-    public Page<AppointmentResource> getAllAppointments(Pageable pageable){
-        Page<Appointment> appointmentPage = appointmentService.getAllAppointments(pageable);
+    public Page<AppointmentResource> getAllAppointments(Pageable pageable,
+                                                        @RequestParam(value = "owner",required = false) Long ownerId,
+                                                        @RequestParam(value = "consultant",required = false) Long consultantId){
+        Page<Appointment> appointmentPage = ownerId != null ?
+                appointmentService.getAllAppointmentsByUserId(pageable,ownerId,-1L):
+                consultantId != null ?
+                        appointmentService.getAllAppointmentsByUserId(pageable,-1L, consultantId):
+                        appointmentService.getAllAppointments(pageable);
+
 
         List<AppointmentResource> resources = appointmentPage.getContent()
                 .stream()

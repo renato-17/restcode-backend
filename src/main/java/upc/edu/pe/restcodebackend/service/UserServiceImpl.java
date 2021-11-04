@@ -15,10 +15,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Profile authentication(String email, String password) {
         Profile profile = profileRepository.findByEmail(email)
-                .orElseThrow(()-> new ResourceNotFoundException("Profile","Email",email));
+                .orElseThrow(()-> new ResourceNotFoundException("Email does not exists"));
 
         if(!profile.getPassword().equals(password)){
-            return null;
+            throw  new ResourceNotFoundException("Incorrect Password");
         }
         return profile;
     }

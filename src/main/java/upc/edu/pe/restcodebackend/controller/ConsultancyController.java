@@ -46,6 +46,12 @@ public class ConsultancyController {
         return convertToResource(consultancyService.getConsultancyById(consultancyId));
     }
 
+    @Operation(summary = "Get Consultancy By Id", description = "Get Consultancy By Id", tags = {"consultancies"})
+    @GetMapping("appointments/{appointmentId}/consultancies")
+    public ConsultancyResource getConsultancyByAppointmentId(@PathVariable Long appointmentId){
+        return convertToResource(consultancyService.getConsultancyByAppointmentId(appointmentId));
+    }
+
     @Operation(summary = "Create Consultancy", description = "Create a new consultancy", tags = {"consultancies"})
     @PostMapping("appointments/{appointmentId}/consultancies")
     public ConsultancyResource createConsultancy(@Valid @RequestBody SaveConsultancyResource resource,@PathVariable Long appointmentId){

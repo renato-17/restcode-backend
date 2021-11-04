@@ -8,6 +8,7 @@ import upc.edu.pe.restcodebackend.domain.model.Consultancy;
 public interface ConsultancyService {
     Page<Consultancy> getAllConsultancies(Pageable pageable);
     Consultancy getConsultancyById(Long consultancyId);
+    Consultancy getConsultancyByAppointmentId(Long appointmentId);
     Consultancy createConsultancy(Consultancy consultancy, Long appointmentId);
     Consultancy updateConsultancy(Long consultancyId, Consultancy consultancyRequest);
     ResponseEntity<?> deleteConsultancy(Long consultancyId);

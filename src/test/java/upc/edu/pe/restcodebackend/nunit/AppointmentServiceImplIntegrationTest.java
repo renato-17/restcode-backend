@@ -48,7 +48,7 @@ public class AppointmentServiceImplIntegrationTest {
 
     @Test
     @DisplayName("When AppointmentById With Valid Id Then Returns Appointment")
-    public void whenGetAppointmentByIdWithValidIdThenReturnsAppointment() { 
+    public void whenGetAppointmentByIdWithValidIdThenReturnsAppointment() {
         //Arrange
         Long id = 1L;
         String link = "Link de Prueba";

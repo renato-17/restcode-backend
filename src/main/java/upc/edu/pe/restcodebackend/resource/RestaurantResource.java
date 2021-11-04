@@ -5,6 +5,7 @@ public class RestaurantResource {
     private String name;
     public String address;
     private String cellPhoneNumber;
+    private String ownerId;
 
     public Long getId() {
         return id;
@@ -38,4 +39,11 @@ public class RestaurantResource {
         this.cellPhoneNumber = cellPhoneNumber;
     }
 
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
 }

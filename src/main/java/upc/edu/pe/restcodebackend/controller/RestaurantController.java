@@ -46,6 +46,12 @@ public class RestaurantController {
         return convertToResource(restaurantService.getRestaurantById(restaurantId));
     }
 
+    @Operation(summary = "Get Restaurant By Id", description = "Get Restaurant By Id", tags = {"restaurants"})
+    @GetMapping("owners/{ownerId}/restaurants")
+    public RestaurantResource getRestaurantByOwnerId(@PathVariable Long ownerId){
+        return convertToResource(restaurantService.getRestaurantByOwnerId(ownerId));
+    }
+
     @Operation(summary = "Create Restaurant", description = "Create a new restaurant", tags = {"restaurants"})
     @PostMapping("owners/{ownerId}/restaurants")
     public RestaurantResource createRestaurant(@Valid @RequestBody SaveRestaurantResource resource,@PathVariable Long ownerId){

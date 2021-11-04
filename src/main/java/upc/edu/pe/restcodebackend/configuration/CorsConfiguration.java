@@ -15,9 +15,7 @@ public class CorsConfiguration {
                 registry.addMapping("/**")
                         .allowedMethods("*")
                         .allowedHeaders("*")
-                        .allowedOrigins("http://localhost:4200");
-
-                WebMvcConfigurer.super.addCorsMappings(registry);
+                        .allowedOrigins("*");
             }
         };
     }

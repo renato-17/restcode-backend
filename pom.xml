@@ -10,12 +10,13 @@
 	</parent>
 	<groupId>upc.edu.pe</groupId>
 	<artifactId>restcode-backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>restcode-backend</name>
 	<description>restcode-backend</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
+	<packaging>war</packaging>
 
 	<dependencies>
 		<dependency>
@@ -25,6 +26,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope> <!-- This is important. -->
 		</dependency>
 
 		<dependency>
@@ -80,6 +87,7 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>

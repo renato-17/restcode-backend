@@ -9,6 +9,7 @@ public class OwnerResource {
     protected String cellphone;
     protected String email;
     private String ruc;
+    private String password;
 
     public String getRuc() {
         return ruc;
@@ -72,5 +73,13 @@ public class OwnerResource {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

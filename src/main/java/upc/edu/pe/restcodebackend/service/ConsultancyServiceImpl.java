@@ -30,6 +30,12 @@ public class ConsultancyServiceImpl implements ConsultancyService {
     }
 
     @Override
+    public Consultancy getConsultancyByAppointmentId(Long appointmentId) {
+        return consultancyRepository.getConsultancyByAppointmentId(appointmentId)
+                .orElseThrow(()-> new ResourceNotFoundException("Consultancy","Appointment Id",appointmentId));
+    }
+
+    @Override
     public Consultancy createConsultancy(Consultancy consultancy, Long appointmentId) {
         return appointmentRepository.findById(appointmentId).map(appointment ->{
             consultancy.setAppointment(appointment);

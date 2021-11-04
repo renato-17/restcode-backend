@@ -29,6 +29,12 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
+    public Restaurant getRestaurantByOwnerId(Long ownerId) {
+        return restaurantRepository.findByOwnerId(ownerId)
+                .orElseThrow(()-> new ResourceNotFoundException("Restaurant","Owner Id",ownerId));
+    }
+
+    @Override
     public Restaurant createRestaurant(Restaurant restaurant, Long ownerId) {
         return ownerRepository.findById(ownerId).map(owner ->{
             restaurant.setOwner(owner);

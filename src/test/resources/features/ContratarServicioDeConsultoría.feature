@@ -8,5 +8,5 @@ Feature: Contratar servicio de consultoría
     Given que el dueño del restaurante quiere programar una cita con un consultor
     When solicita una cita ingresando los datos que se piden
       | CurrentDateTime | ScheduleDateTime | Topic  | MeetLink                     |
-      | 29-10-2020      | 07-11-2020       | Topic1 | meet.google.com.mez-uwgg-obk |
+      | 29/10/2020      | 07/11/2020       | Topic1 | meet.google.com.mez-uwgg-obk |
     Then el sistema programa la cita de manera exitosa.

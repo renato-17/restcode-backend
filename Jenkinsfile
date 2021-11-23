@@ -26,7 +26,7 @@ pipeline {
             steps {
                 withMaven(maven : 'MAVEN_3_8_3') {
                     bat 'mvn package'
-                    bat 'clean install'
+                    bat 'mvn clean install'
                 }
             }
         }

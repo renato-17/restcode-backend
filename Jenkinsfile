@@ -1,8 +1,6 @@
 pipeline {
     agent any
     tools {
-        tomcatWeb 'C:\\Program Files\\jenkins\\apache-tomcat-9.0.54\\webapps'
-        tomcatBin 'C:\\Program Files\\jenkins\\apache-tomcat-9.0.54\\bin'
         maven 'MAVEN_3_8_3'
         jdk 'JAVA_1_8'
     }

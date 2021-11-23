@@ -34,13 +34,12 @@ pipeline {
         }
         stage('Deploy to Tomcat') {
             steps {
-                bat "copy target\\restcode-backend.war \"${tomcatWeb}\\restcode-backend.war\""
+                bat 'copy target\\rescode.war C:\\Program Files\\jenkins\\apache-tomcat-9.0.54\\webapps\\restcode.war'
             }
         }
         stage('Start Tomact Server') {
             steps {
-                sleep(time:5, unit:'SECONDS')
-                bat "${tomcatBin}\\startup.bat"
+                bat 'C:\\Program Files\\jenkins\\apache-tomcat-9.0.54\\bin\\startup.bat'
             }
         }
     }

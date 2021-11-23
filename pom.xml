@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>upc.edu.pe</groupId>
-	<artifactId>restcode-backend</artifactId>
+	<artifactId>restcode</artifactId>
 	<version>1.0</version>
-	<name>restcode-backend</name>
+	<name>restcode</name>
 	<description>restcode-backend</description>
 	<properties>
 		<java.version>1.8</java.version>

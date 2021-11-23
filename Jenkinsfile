@@ -37,7 +37,7 @@ pipeline {
         }
         stage('Start Tomact Server') {
             steps {
-                bat "C:\\Program Files\\jenkins\\apache-tomcat-9.0.54\\bin\\startup.bat"
+                bat 'C:\\Program Files\\jenkins\\apache-tomcat-9.0.54\\bin\\startup.bat'
             }
         }
     }

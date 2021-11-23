@@ -10,21 +10,21 @@ pipeline {
     stages {
         stage('Integration Stage') {
             steps {
-                withMaven(maven : maven) {
+                withMaven(maven : 'MAVEN_3_8_3') {
                     bat 'mvn clean compile'
                 }
             }
         }
         stage('Testing Stage') {
             steps {
-                withMaven(maven : maven) {
+                withMaven(maven : 'MAVEN_3_8_3') {
                     bat 'mvn test'
                 }
             }
         }
         stage('Delivery Stage') {
             steps {
-                withMaven(maven : maven) {
+                withMaven(maven : 'MAVEN_3_8_3') {
                     bat 'mvn package'
                     bat 'clean install'
                 }

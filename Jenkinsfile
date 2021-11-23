@@ -37,7 +37,9 @@ pipeline {
         }
         stage('Start Tomact Server') {
             steps {
+                sleep(time:5,unit:"SECONDS") 
                 bat '"C:\\Program Files\\jenkins\\apache-tomcat-9.0.54\\bin\\startup.bat"'
+                sleep(time:100,unit:"SECONDS") 
             }
         }
     }

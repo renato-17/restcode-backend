@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Deploy to Tomcat') {
             steps {
-                bat 'copy target\\rescode.war C:\\Program Files\\jenkins\\apache-tomcat-9.0.54\\webapps\\restcode.war'
+                bat 'copy target\\rescode-1.0.war C:\\Program Files\\jenkins\\apache-tomcat-9.0.54\\webapps\\restcode-1.0.war'
             }
         }
         stage('Start Tomact Server') {
